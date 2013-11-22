@@ -23,7 +23,7 @@ To send a message, just run the following command:
 
 To get the app to identify as you, you'll have to run the following command just once:
 ```
-$ tdm your_user_name "The complete message"
+$ tdm destination_user_name "The complete message"
 ```
 
 ###Receiving / Reading
