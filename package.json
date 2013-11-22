@@ -3,7 +3,7 @@
 	"author": "Fernando Doglio <deleteman@gmail.com>",
 	"description": "Send Direct Messages on Twitter from the command line",
 	"keywords": ["dm", "direct message", "twitter", "command line"],
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"dependencies": {
 		"simple-twitter":"*",
 		"request": "*",

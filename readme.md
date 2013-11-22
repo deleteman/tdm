@@ -21,13 +21,16 @@ It'll prompt you to visit a URL, that URL will ask you to identify the app on tw
 
 To send a message, just run the following command:
 
-To get the app to identify as you, you'll have to run the following command just once:
 ```
 $ tdm destination_user_name "The complete message"
 ```
 
 ###Receiving / Reading
 -- TODO
+
+##Running this code locally
+
+If you've downloaded the code and want to try it for yourself, you'll have to register an app on the twitter dev site and rename the file under `/lib/twitter-keys-sample.json` to `/lib/twitter-keys.json` filling in the tokens required.
 
 ##Contribute
 
