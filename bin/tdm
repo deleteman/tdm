@@ -1,4 +1,4 @@
-#/usr/bin/env node
+//#/usr/bin/env node
 
 var twitterApi = require("../lib/twitter.js"),
 	request = require("request");
@@ -42,6 +42,9 @@ if(init) {
 			});
 		});
 } else {
+	var destination = arguments[0];
+	var message = arguments[1];
+	/*
 	var oauth = { //deleteman123
 		token: "156746498-IlYBBdVnV8rvi0Khudj8xOdUi2js980mjgAPaFMe",
 		token_secret: "0iLP6B7rI9LiFGf35y2NaHxWbhcFBbpvrrzZxffgahmKR"
@@ -50,5 +53,6 @@ if(init) {
 		token: "1266237950-mfxYniRThUbfT5pOiMMLcHmlVbhIafqY0ES5cfN",
 		token_secret: "2BSP9gF7R8MW5yw1OC04C8yQTpMTZa0vlkER8YsW78VzB"
 	};
-	twitterApi.sendDM(oauth, "Hola, esto es una prueba!");
+	*/
+	twitterApi.sendDM(destination, message);
 }
