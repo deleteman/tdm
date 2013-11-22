@@ -1,5 +1,12 @@
-#Twitter Direct Messa - t-dm
-Send and read DM's using Twitter's API from the command line.
+#Twitter Direct Messages - t-dm
+Send and read Twitter's DMs using Twitter's API from the command line.
+
+##Installing
+
+```
+$ npm install tdm -g
+```
+
 
 ##Usage:
 
