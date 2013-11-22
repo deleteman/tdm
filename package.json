@@ -1,0 +1,13 @@
+{
+	"name": "t-dm",
+	"author": "Fernando Doglio <deleteman@gmail.com>",
+	"description": "Send Direct Messages on Twitter from the command line",
+	"keywords": ["dm", "direct message", "twitter"],
+	"version": "0.1.0",
+	"dependencies": {
+		"simple-twitter":"*",
+		"request": "*",
+		"querystring":"*"
+	},
+	"bin": "./bin/tdm"
+}

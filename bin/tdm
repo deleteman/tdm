@@ -1,0 +1,54 @@
+#/usr/bin/env node
+
+var twitterApi = require("../lib/twitter.js"),
+	request = require("request");
+
+var init = false;
+/**
+
+Init process:
+
+1. Check for params
+2. IF correct, request token on Twitter
+	2.1 Send request to Twitter 
+	2.2 Show url to user
+	2.3 Request PIN and save it
+	2.4 USe PIN to request Access Token and Save it
+
+Normal process
+1. Use saved access token to post message
+
+*/
+var arguments = process.argv.slice(2);
+
+var init = (arguments[0] == 'init');
+
+if(init) {
+
+		twitterApi.getAuthURL(function (url, auth_token) {
+			console.log("Go to this URL and get the PIN: " + url);
+			var PIN = "";
+			process.stdin.resume();
+			process.stdin.setEncoding("utf8");
+			process.stdin.once("data", function (chunk) {
+				PIN = chunk.toString().trim();
+				token = twitterApi.getAccessToken(auth_token, PIN, function (params) {
+					console.log("Here are your security toekns: ");
+					console.log("Token: " + params.oauth_token);
+					console.log("Secret Token: " + params.oauth_token_secret);
+					console.log("Data saved, you can now post!");
+					process.exit();
+				});
+			});
+		});
+} else {
+	var oauth = { //deleteman123
+		token: "156746498-IlYBBdVnV8rvi0Khudj8xOdUi2js980mjgAPaFMe",
+		token_secret: "0iLP6B7rI9LiFGf35y2NaHxWbhcFBbpvrrzZxffgahmKR"
+	};
+	var oauth = { //looking for pr
+		token: "1266237950-mfxYniRThUbfT5pOiMMLcHmlVbhIafqY0ES5cfN",
+		token_secret: "2BSP9gF7R8MW5yw1OC04C8yQTpMTZa0vlkER8YsW78VzB"
+	};
+	twitterApi.sendDM(oauth, "Hola, esto es una prueba!");
+}
