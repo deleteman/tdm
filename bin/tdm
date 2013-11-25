@@ -30,7 +30,11 @@ if(init) {
 	var message = arguments[1];
 
 	if(destination != undefined && message != undefined) {
-		twitterApi.sendDM(destination, message);
+		if(message.length > 142) {
+			console.log("Message is too big, please keep it under 140 characters");
+		} else {
+			twitterApi.sendDM(destination, message);
+		}
 	} else {
 		console.log("Wrong parameters, make sure you're using the app correctly:");
 		console.log('$ tdm [destination_screen_name] "[Message to send quoted]"');
