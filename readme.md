@@ -25,6 +25,8 @@ To send a message, just run the following command:
 $ tdm destination_user_name "The complete message"
 ```
 
+_Note_ that if your message is longer than 140 characters, TDM will split it into as many parts as required and it'll send all parts sequentially.
+
 ###Receiving / Reading
 -- TODO
 
