@@ -4,7 +4,7 @@ Send and read Twitter's DMs using Twitter's API from the command line.
 ##Installing
 
 ```
-$ npm install tdm -g
+$ npm install t-dm -g
 ```
 
 
