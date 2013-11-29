@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var twitterApi = require("../lib/twitter.js"),
-	request = require("request");
+	ViewHandler = require("../lib/viewHandler"),
+	CommandFactory = require("../lib/commandFactory");
 
 var arguments = process.argv.slice(2);
 
@@ -26,24 +27,8 @@ if(init) {
 			});
 		});
 } else {
-	var destination = arguments[0];
-	var message = arguments[1];
-
-	if(destination != undefined && message != undefined) {
-		
-		twitterApi.sendDM(destination, message, function(err) {
-			if(err) {
-				if(!Array.isArray(err)) err = [err];
-				console.log("There was an error while sending the message, details:");
-				console.log(err.join("\n"));
-			} else {
-				console.log("Message sent!");
-			}
-		});
-	} else {
-		console.log("Wrong parameters, make sure you're using the app correctly:");
-		console.log('$ tdm [destination_screen_name] "[Message to send quoted]"');
-		console.log("");
-	}
-
+	var command = CommandFactory.getCommand(arguments);
+	command.run(function(err, result) {
+		ViewHandler.show(err, command, result);
+	});
 }
