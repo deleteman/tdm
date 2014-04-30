@@ -1,34 +1,44 @@
 #!/usr/bin/env node
 
 var twitterApi = require("../lib/twitter.js"),
-	ViewHandler = require("../lib/viewHandler"),
-	CommandFactory = require("../lib/commandFactory");
+    ViewHandler = require("../lib/viewHandler"),
+    CommandFactory = require("../lib/commandFactory");
 
 var arguments = process.argv.slice(2);
+
+if(arguments.length == 0) {
+    console.log("Twitter Direct Messaging (tdm) helps you send and read direct messages from the command line.");
+    console.log("Commands: ");
+    console.log(" - init: Needs to be executed the first time, to setup the user's twitter credentials");
+    console.log(" - read [inbox]: Lists the last 20 messages in your inox");
+    console.log(" - read [MESSAGE-ID]: Reads the full content of a message");
+    console.log(" - username \"message\": Sends a direct message to user @username");
+    return;
+}
 
 var init = (arguments[0] == 'init');
 
 if(init) {
-		twitterApi.getAuthURL(function (url, auth_token) {
-			console.log("Go to this URL and get the PIN: " + url);
-			var PIN = "";
-			console.log("Enter the PIN here: ");
-			process.stdin.resume();
-			process.stdin.setEncoding("utf8");
-			process.stdin.once("data", function (chunk) {
-				PIN = chunk.toString().trim();
-				token = twitterApi.getAccessToken(auth_token, PIN, function (params) {
-					console.log("Here are your security tokens: ");
-					console.log("Token: " + params.oauth_token);
-					console.log("Secret Token: " + params.oauth_token_secret);
-					console.log("Data saved, you can now post!");
-					process.exit();
-				});
-			});
-		});
+        twitterApi.getAuthURL(function (url, auth_token) {
+            console.log("Go to this URL and get the PIN: " + url);
+            var PIN = "";
+            console.log("Enter the PIN here: ");
+            process.stdin.resume();
+            process.stdin.setEncoding("utf8");
+            process.stdin.once("data", function (chunk) {
+                PIN = chunk.toString().trim();
+                token = twitterApi.getAccessToken(auth_token, PIN, function (params) {
+                    console.log("Here are your security tokens: ");
+                    console.log("Token: " + params.oauth_token);
+                    console.log("Secret Token: " + params.oauth_token_secret);
+                    console.log("Data saved, you can now post!");
+                    process.exit();
+                });
+            });
+        });
 } else {
-	var command = CommandFactory.getCommand(arguments);
-	command.run(function(err, result) {
-		ViewHandler.show(err, command, result);
-	});
+    var command = CommandFactory.getCommand(arguments);
+    command.run(function(err, result) {
+        ViewHandler.show(err, command, result);
+    });
 }
